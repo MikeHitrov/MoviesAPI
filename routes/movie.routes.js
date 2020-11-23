@@ -32,3 +32,15 @@ router.get("/:id", middlewares.mustBeInteger, async (req, res) => {
       }
     });
 });
+
+router.post("/", middlewares.checkFieldsPost, async (req, res) => {
+  await movie
+    .insertMovie(req.query)
+    .then((movie) =>
+      res.status(201).json({
+        message: `The movie #${movie.id} has been created`,
+        content: movie,
+      })
+    )
+    .catch((err) => res.status(500).json({ message: err.message }));
+});

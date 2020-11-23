@@ -8,12 +8,12 @@ function mustBeInteger(req, res, next) {
   }
 }
 function checkFieldsPost(req, res, next) {
-  const { title, director, releaseDate, genre, actors } = req.body;
+  const { title, director, releaseDate, genre, actors } = req.query;
 
   if (title && director && releaseDate && genre && actors) {
     next();
   } else {
-    res.status(400).json({ message: "fields are not good" });
+    res.status(400).json({ message: "Fields are not good" });
   }
 }
 module.exports = {

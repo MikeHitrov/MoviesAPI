@@ -30,7 +30,7 @@ function insertMovie(newMovie) {
       createdAt: helper.newDate(),
       updatedAt: helper.newDate(),
     };
-    newMovie = { ...id, ...date, ...newMovie };
+    newMovie = { ...id, ...newMovie, ...date };
     movies.push(newMovie);
     helper.writeJSONFile(filename, movies);
     resolve(newMovie);
