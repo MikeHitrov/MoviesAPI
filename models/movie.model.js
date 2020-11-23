@@ -1,6 +1,6 @@
 const filename = "../data/movies.json";
 let movies = require(filename);
-const helper = require("../helper.js");
+const helper = require("../helpers/helper.js");
 
 function getMovies() {
   return new Promise((resolve, reject) => {

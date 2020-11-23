@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const post = require("../models/movie.model");
+const movie = require("../models/movie.model");
 const m = require("../helpers/middlewares");
 
 // Routes
 module.exports = router;
 
 router.get("/", async (req, res) => {
-  await post
-    .getPosts()
-    .then((posts) => res.json(posts))
+  await movie
+    .getMovies()
+    .then((movies) => res.json(movies))
     .catch((err) => {
       if (err.status) {
         res.status(err.status).json({ message: err.message });
