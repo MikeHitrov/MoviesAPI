@@ -23,6 +23,21 @@ function mustBeInArray(array, id) {
   });
 }
 
+function filterByGenre(array, genre) {
+  return new Promise((resolve, reject) => {
+    let rows = array.find((m) => m.genre == genre);
+
+    if (!rows) {
+      reject({
+        message: "There are not any films with this genre.",
+        status: 404,
+      });
+    }
+
+    resolve(rows);
+  });
+}
+
 function writeJSONFile(filename, content) {
   fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
     if (err) {
@@ -35,5 +50,6 @@ module.exports = {
   getNewId,
   newDate,
   mustBeInArray,
+  filterByGenre,
   writeJSONFile,
 };

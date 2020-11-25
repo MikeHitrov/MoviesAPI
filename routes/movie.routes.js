@@ -35,7 +35,7 @@ router.get("/:id", middlewares.mustBeInteger, async (req, res) => {
 
 router.post("/", middlewares.checkFieldsPost, async (req, res) => {
   await movie
-    .insertMovie(req.query)
+    .insertMovie(req.params)
     .then((movie) =>
       res.status(201).json({
         message: `The movie #${movie.id} has been created`,
@@ -43,4 +43,59 @@ router.post("/", middlewares.checkFieldsPost, async (req, res) => {
       })
     )
     .catch((err) => res.status(500).json({ message: err.message }));
+});
+
+router.put(
+  "/:id",
+  middlewares.mustBeInteger,
+  middlewares.checkFieldsPost,
+  async (req, res) => {
+    const id = req.params.id;
+    await movie
+      .updateMovie(id, req.params)
+      .then((movie) =>
+        res.json({
+          message: `The movie #${id} has been updated.`,
+          content: movie,
+        })
+      )
+      .catch((err) => {
+        if (err.status) {
+          res.status(err.status).json({ message: err.message });
+        }
+        res.status(500).json({ message: err.message });
+      });
+  }
+);
+
+router.delete("/:id", middlewares.mustBeInteger, async (req, res) => {
+  const id = req.params.id;
+
+  await movie
+    .deleteMovie(id)
+    .then((movie) =>
+      res.json({
+        message: `The movie #${id} has been deleted.`,
+      })
+    )
+    .catch((err) => {
+      if (err.status) {
+        res.status(err.status).json({ message: err.message });
+      }
+      res.status(500).json({ message: err.message });
+    });
+});
+
+router.get("/genre/:genre", async (req, res) => {
+  const genre = req.params.genre;
+  await movie
+    .getMoviesByGenre(genre)
+    .then((movies) => res.json(movies))
+    .catch((err) => {
+      if (err.status) {
+        res.status(err.status).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: err.message });
+      }
+    });
 });

@@ -71,10 +71,20 @@ function deleteMovie(id) {
   });
 }
 
+function getMoviesByGenre(genre) {
+  return new Promise((resolve, reject) => {
+    helper
+      .filterByGenre(movies, genre)
+      .then((movies) => resolve(movies))
+      .catch((err) => reject(err));
+  });
+}
+
 module.exports = {
   insertMovie,
   getMovies,
   getMovie,
   updateMovie,
   deleteMovie,
+  getMoviesByGenre,
 };
