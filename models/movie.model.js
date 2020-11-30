@@ -6,7 +6,7 @@ const helper = require("../helpers/helper.js");
 /**
  * This function returns all the movies
  *
- * @returns {Array}
+ * @returns {Promise} Returns all the movies
  */
 function getMovies() {
   return new Promise((resolve, reject) => {
@@ -20,6 +20,12 @@ function getMovies() {
   });
 }
 
+/**
+ * This function returns a movie by given id
+ *
+ * @param {number} id The movie id
+ * @returns {Promise} Returns the movie if present
+ */
 function getMovie(id) {
   return new Promise((resolve, reject) => {
     helper
@@ -29,6 +35,12 @@ function getMovie(id) {
   });
 }
 
+/**
+ * This function inserts a new movie into the JSON file
+ *
+ * @param {object} newMovie The details about the movie
+ * @returns {Promise} Returns the newly created movie
+ */
 function insertMovie(newMovie) {
   return new Promise((resolve, reject) => {
     const id = { id: helper.getNewId(movies) };
@@ -43,6 +55,13 @@ function insertMovie(newMovie) {
   });
 }
 
+/**
+ * This function updares a movie by given id and rewrites the JSON file
+ *
+ * @param {number} id The movie id
+ * @param {object} newMovie The details about the updated movie
+ * @returns {Promise} Returns the updated movie if updated successfully
+ */
 function updateMovie(id, newMovie) {
   return new Promise((resolve, reject) => {
     helper
@@ -64,6 +83,12 @@ function updateMovie(id, newMovie) {
   });
 }
 
+/**
+ * This function deletes a movie by given id and rewrites the JSON file
+ *
+ * @param {number} id The movie id
+ * @returns {undefined}
+ */
 function deleteMovie(id) {
   return new Promise((resolve, reject) => {
     helper
@@ -77,6 +102,12 @@ function deleteMovie(id) {
   });
 }
 
+/**
+ * This function retuns movies filtered by given genre
+ *
+ * @param {string} genre The wanted genre
+ * @returns {Promise} Returns all the filtered movies
+ */
 function getMoviesByGenre(genre) {
   return new Promise((resolve, reject) => {
     helper
