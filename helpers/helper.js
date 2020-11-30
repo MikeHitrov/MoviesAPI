@@ -1,5 +1,11 @@
 const fs = require("fs");
 
+/**
+ * This function generates a new id
+ *
+ * @param  {object} array The movies array
+ * @returns {number} The generated id
+ */
 const getNewId = (array) => {
   if (array.length > 0) {
     return array[array.length - 1].id + 1;
@@ -8,8 +14,20 @@ const getNewId = (array) => {
   }
 };
 
+/**
+ * This function generates a new date
+ *
+ * @returns {string} The generated date
+ */
 const newDate = () => new Date().toString();
 
+/**
+ * This function checks if a movie is in the object based on its id
+ *
+ * @param  {object} array The movies array
+ * @param  {number} id The movie id
+ * @returns {object} The movie
+ */
 function mustBeInArray(array, id) {
   return new Promise((resolve, reject) => {
     const row = array.find((r) => r.id == id);
@@ -23,6 +41,13 @@ function mustBeInArray(array, id) {
   });
 }
 
+/**
+ * This filters the movies based on the genre
+ *
+ * @param  {array} array The movies array
+ * @param  {string} genre The genre that we want to filter
+ * @returns {Promise} The movies that are filtered based on the genre
+ */
 function filterByGenre(array, genre) {
   return new Promise((resolve, reject) => {
     let rows = array.find((m) => m.genre == genre);
@@ -38,6 +63,12 @@ function filterByGenre(array, genre) {
   });
 }
 
+/**
+ * This function writes on the JSON file
+ *
+ * @param  {string} filename The path to the file
+ * @param  {string} content The content that needs to be written
+ */
 function writeJSONFile(filename, content) {
   fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
     if (err) {
