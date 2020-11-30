@@ -1,3 +1,11 @@
+/**
+ * This middleware checks if a given id is integer
+ *
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next middleware function
+ * @return {undefined}
+ */
 function mustBeInteger(req, res, next) {
   const id = req.params.id;
 
@@ -7,6 +15,15 @@ function mustBeInteger(req, res, next) {
     next();
   }
 }
+
+/**
+ * This middleware checks if a fields match
+ *
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next middleware function
+ * @return {undefined}
+ */
 function checkFieldsPost(req, res, next) {
   const { title, director, releaseDate, genre, actors } = req.this.params;
 
@@ -16,6 +33,7 @@ function checkFieldsPost(req, res, next) {
     res.status(400).json({ message: "Fields are not good" });
   }
 }
+
 module.exports = {
   mustBeInteger,
   checkFieldsPost,

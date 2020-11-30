@@ -3,7 +3,7 @@ const fs = require("fs");
 /**
  * This function generates a new id
  *
- * @param  {object} array The movies array
+ * @param  {Array} array The movies array
  * @returns {number} The generated id
  */
 const getNewId = (array) => {
@@ -24,7 +24,7 @@ const newDate = () => new Date().toString();
 /**
  * This function checks if a movie is in the object based on its id
  *
- * @param  {object} array The movies array
+ * @param  {Array} array The movies array
  * @param  {number} id The movie id
  * @returns {object} The movie
  */
@@ -44,7 +44,7 @@ function mustBeInArray(array, id) {
 /**
  * This filters the movies based on the genre
  *
- * @param  {array} array The movies array
+ * @param  {Array} array The movies array
  * @param  {string} genre The genre that we want to filter
  * @returns {Promise} The movies that are filtered based on the genre
  */

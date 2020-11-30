@@ -3,6 +3,11 @@ const filename =
 let movies = require(filename);
 const helper = require("../helpers/helper.js");
 
+/**
+ * This function returns all the movies
+ *
+ * @returns {Array}
+ */
 function getMovies() {
   return new Promise((resolve, reject) => {
     if (movies.length === 0) {
