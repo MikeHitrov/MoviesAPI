@@ -30,21 +30,5 @@
     ],
     "createdAt": "Mon Nov 23 2020 14:32:03 GMT+0200 (CEST)",
     "updatedAt": "Mon Nov 23 2020 14:32:03 GMT+0200 (CEST)"
-  },
-  {
-    "id": 3,
-    "createdAt": "Mon Nov 30 2020 12:32:00 GMT+0200 (Eastern European Standard Time)",
-    "updatedAt": "Mon Nov 30 2020 12:38:38 GMT+0200 (Eastern European Standard Time)",
-    "title": "Fast & Furious 10",
-    "director": "Justin Lin",
-    "releaseDate": 2021,
-    "genre": "action",
-    "actors": [
-      "Vin Diesel",
-      "Paul Walker's brother",
-      "Michelle Horhe",
-      "Jordana Brewster",
-      "John Ortiz"
-    ]
   }
 ]

@@ -8,30 +8,30 @@ test("Gets all movies", () => {
   });
 });
 
-// test("Creates a movie", () => {
-//   let newMovie = {
-//     title: "Fast & Furious 3",
-//     director: "Justin Lin",
-//     releaseDate: 2007,
-//     genre: "action",
-//     actors: [
-//       "Vin Diesel",
-//       "Paul Walker",
-//       "Michelle Horhe",
-//       "Jordana Brewster",
-//       "John Ortiz",
-//     ],
-//   };
+test("Creates a movie", () => {
+  let newMovie = {
+    title: "Fast & Furious 3",
+    director: "Justin Lin",
+    releaseDate: 2007,
+    genre: "action",
+    actors: [
+      "Vin Diesel",
+      "Paul Walker",
+      "Michelle Horhe",
+      "Jordana Brewster",
+      "John Ortiz",
+    ],
+  };
 
-//   model.insertMovie(newMovie).then((movie) => {
-//     expect(movie.id).toBe(3);
-//   });
+  model.insertMovie(newMovie).then((movie) => {
+    expect(movie.id).toBe(3);
+  });
 
-//   model.getMovies().then((movies) => {
-//     expect(movies.length).toBe(3);
-//     expect(movies[2].title).toBe("Fast & Furious 3");
-//   });
-// });
+  model.getMovies().then((movies) => {
+    expect(movies.length).toBe(3);
+    expect(movies[2].title).toBe("Fast & Furious 3");
+  });
+});
 
 test("Updates a movie", () => {
   let updatedMovie = {
@@ -61,10 +61,20 @@ test("Get movie by id", () => {
   });
 });
 
-// test("Deletes a movie", () => {
-//   model.deleteMovie(3);
+test("Get movies by genre", () => {
+  model.getMoviesByGenre("action").then((movies) => {
+    expect(movies.length).toBe(2);
+  });
 
-//   model.getMovies().then((movies) => {
-//     expect(movies.length).toBe(2);
-//   });
-// });
+  model.getMoviesByGenre("science fiction").then((movies) => {
+    expect(movies.length).toBe(1);
+  });
+});
+
+test("Deletes a movie", () => {
+  model.deleteMovie(3);
+
+  model.getMovies().then((movies) => {
+    expect(movies.length).toBe(2);
+  });
+});
