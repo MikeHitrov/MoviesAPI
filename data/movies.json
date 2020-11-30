@@ -33,18 +33,18 @@
   },
   {
     "id": 3,
-    "title": "Fast & Furious 3",
+    "createdAt": "Mon Nov 30 2020 12:32:00 GMT+0200 (Eastern European Standard Time)",
+    "updatedAt": "Mon Nov 30 2020 12:38:38 GMT+0200 (Eastern European Standard Time)",
+    "title": "Fast & Furious 10",
     "director": "Justin Lin",
-    "releaseDate": 2007,
+    "releaseDate": 2021,
     "genre": "action",
     "actors": [
       "Vin Diesel",
-      "Paul Walker",
+      "Paul Walker's brother",
       "Michelle Horhe",
       "Jordana Brewster",
       "John Ortiz"
-    ],
-    "createdAt": "Mon Nov 30 2020 12:32:00 GMT+0200 (Eastern European Standard Time)",
-    "updatedAt": "Mon Nov 30 2020 12:32:00 GMT+0200 (Eastern European Standard Time)"
+    ]
   }
 ]
