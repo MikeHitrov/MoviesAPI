@@ -26,9 +26,9 @@ const newDate = () => new Date().toString();
  *
  * @param  {Array} array The movies array
  * @param  {number} id The movie id
- * @returns {object} The movie
+ * @returns {Promise} The movie object if found or an error otherwise
  */
-function mustBeInArray(array, id) {
+function searchByIdInArray(array, id) {
   return new Promise((resolve, reject) => {
     const row = array.find((r) => r.id == id);
     if (!row) {
@@ -70,9 +70,9 @@ function filterByGenre(array, genre) {
  * @param  {string} content The content that needs to be written
  */
 function writeJSONFile(filename, content) {
-  fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
+  fs.writeFile(filename, JSON.stringify(content), "utf8", (err) => {
     if (err) {
-      console.log(err);
+      fs.writeFile(err);
     }
   });
 }
@@ -80,7 +80,7 @@ function writeJSONFile(filename, content) {
 module.exports = {
   getNewId,
   newDate,
-  mustBeInArray,
+  searchByIdInArray,
   filterByGenre,
   writeJSONFile,
 };

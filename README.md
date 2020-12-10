@@ -1,5 +1,5 @@
 MoviesAPI
-A simple API, which stores information about movies.
+A simple API, which provides CRUD operations over movies model.
 
 Before running the app:
 npm install

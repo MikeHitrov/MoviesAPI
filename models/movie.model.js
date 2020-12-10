@@ -27,12 +27,7 @@ function getMovies() {
  * @returns {Promise} Returns the movie if present
  */
 function getMovie(id) {
-  return new Promise((resolve, reject) => {
-    helper
-      .mustBeInArray(movies, id)
-      .then((movie) => resolve(movie))
-      .catch((err) => reject(err));
-  });
+  return helper.searchByIdInArray(movies, id);
 }
 
 /**
@@ -65,7 +60,7 @@ function insertMovie(newMovie) {
 function updateMovie(id, newMovie) {
   return new Promise((resolve, reject) => {
     helper
-      .mustBeInArray(movies, id)
+      .searchByIdInArray(movies, id)
       .then((movie) => {
         const index = movies.findIndex((m) => m.id == movie.id);
 
@@ -92,7 +87,7 @@ function updateMovie(id, newMovie) {
 function deleteMovie(id) {
   return new Promise((resolve, reject) => {
     helper
-      .mustBeInArray(movies, id)
+      .searchByIdInArray(movies, id)
       .then(() => {
         movies = movies.filter((m) => m.id !== id);
         helper.writeJSONFile(filename, movies);
