@@ -57,23 +57,18 @@ function insertMovie(newMovie) {
  * @returns {Object} Returns the updated movie if updated successfully
  */
 function updateMovie(id, newMovie) {
-  return new Promise((resolve, reject) => {
-    helper
-      .searchByIdInArray(movies, id)
-      .then((movie) => {
-        const index = movies.findIndex((m) => m.id == movie.id);
+  return helper.searchByIdInArray(movies, id).then((movie) => {
+    const index = movies.findIndex((m) => m.id == movie.id);
 
-        id = { id: movie.id };
-        const date = {
-          createdAt: movie.createdAt,
-          updatedAt: helper.newDate(),
-        };
+    id = { id: movie.id };
+    const date = {
+      createdAt: movie.createdAt,
+      updatedAt: helper.newDate(),
+    };
 
-        movies[index] = { ...id, ...date, ...newMovie };
-        helper.writeJSONFile(filename, movies);
-        resolve(movies[index]);
-      })
-      .catch((err) => reject(err));
+    movies[index] = { ...id, ...date, ...newMovie };
+    helper.writeJSONFile(filename, movies);
+    resolve(movies[id]);
   });
 }
 
@@ -84,16 +79,16 @@ function updateMovie(id, newMovie) {
  * @returns {undefined}
  */
 function deleteMovie(id) {
-  return new Promise((resolve, reject) => {
-    helper
-      .searchByIdInArray(movies, id)
-      .then(() => {
-        movies = movies.filter((m) => m.id !== id);
-        helper.writeJSONFile(filename, movies);
-        resolve();
-      })
-      .catch((err) => reject(err));
-  });
+  return helper
+    .searchByIdInArray(movies, Number(id))
+    .then((index) => {
+      movies = movies.filter((m) => m.id != id);
+      helper.writeJSONFile(filename, movies);
+      resolve(undefined);
+    })
+    .catch((err) => {
+      reject(err);
+    });
 }
 
 /**

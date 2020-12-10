@@ -25,7 +25,7 @@ function mustBeInteger(req, res, next) {
  * @return {undefined}
  */
 function checkFieldsPost(req, res, next) {
-  const { title, director, releaseDate, genre, actors } = req.this.params;
+  const { title, director, releaseDate, genre, actors } = req.query;
 
   if (title && director && releaseDate && genre && actors) {
     next();

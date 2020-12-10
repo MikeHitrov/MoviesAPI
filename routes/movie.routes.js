@@ -2,47 +2,31 @@ const express = require("express");
 const router = express.Router();
 const movie = require("../models/movie.model");
 const middlewares = require("../helpers/middlewares");
+const controller = require("../controllers/movie.controller");
 
 // Routes
 module.exports = router;
 
 router.get("/", async (req, res) => {
-  await movie
-    .getMovies()
+  controller
+    .getAllMovies()
     .then((movies) => res.json(movies))
-    .catch((err) => {
-      if (err.status) {
-        res.status(err.status).json({ message: err.message });
-      } else {
-        res.status(500).json({ message: err.message });
-      }
-    });
+    .catch((err) => res.json(err));
 });
 
 router.get("/:id", middlewares.mustBeInteger, async (req, res) => {
   const id = req.params.id;
-  await movie
-    .getMovie(id)
+  controller
+    .getMovieById(id)
     .then((movie) => res.json(movie))
-    .catch((err) => {
-      if (err.status) {
-        res.status(err.status).json({ message: err.message });
-      } else {
-        res.status(500).json({ message: err.message });
-      }
-    });
+    .catch((err) => res.json(err));
 });
 
 router.post("/", middlewares.checkFieldsPost, async (req, res) => {
-  await movie
-    .insertMovie(req.params)
-    .then((movie) =>
-      res.status(201).json({
-        message: `The movie #${movie.id} has been created`,
-        content: movie,
-      })
-    )
-    .catch((err) => res.status(500).json({ message: err.message }));
+  controller
+    .insertMovie(req.query)
+    .then((movie) => res.json(movie))
+    .catch((err) => res.json(err));
 });
 
 router.put(
@@ -51,51 +35,27 @@ router.put(
   middlewares.checkFieldsPost,
   async (req, res) => {
     const id = req.params.id;
-    await movie
-      .updateMovie(id, req.params)
-      .then((movie) =>
-        res.json({
-          message: `The movie #${id} has been updated.`,
-          content: movie,
-        })
-      )
-      .catch((err) => {
-        if (err.status) {
-          res.status(err.status).json({ message: err.message });
-        }
-        res.status(500).json({ message: err.message });
-      });
+    controller
+      .updateMovie(id, req.query)
+      .then((movie) => res.json(movie))
+      .catch((err) => res.json(err));
   }
 );
 
 router.delete("/:id", middlewares.mustBeInteger, async (req, res) => {
   const id = req.params.id;
 
-  await movie
+  controller
     .deleteMovie(id)
-    .then((movie) =>
-      res.json({
-        message: `The movie #${id} has been deleted.`,
-      })
-    )
-    .catch((err) => {
-      if (err.status) {
-        res.status(err.status).json({ message: err.message });
-      }
-      res.status(500).json({ message: err.message });
-    });
+    .then((movie) => res.json(movie))
+    .catch((err) => res.json(err));
 });
 
 router.get("/genre/:genre", async (req, res) => {
   const genre = req.params.genre;
-  await movie
-    .getMoviesByGenre(genre)
+
+  controller
+    .filterMovies(genre)
     .then((movies) => res.json(movies))
-    .catch((err) => {
-      if (err.status) {
-        res.status(err.status).json({ message: err.message });
-      } else {
-        res.status(500).json({ message: err.message });
-      }
-    });
+    .catch((err) => res.json(err));
 });
