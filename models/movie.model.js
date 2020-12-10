@@ -5,7 +5,7 @@ const helper = require("../helpers/helper.js");
 /**
  * This function returns all the movies
  *
- * @returns {Promise} Returns all the movies
+ * @returns {Array} Returns all the movies
  */
 function getMovies() {
   return new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ function getMovies() {
  * This function returns a movie by given id
  *
  * @param {number} id The movie id
- * @returns {Promise} Returns the movie if present
+ * @returns {Object} Returns the movie if present
  */
 function getMovie(id) {
   return helper.searchByIdInArray(movies, id);
@@ -32,8 +32,8 @@ function getMovie(id) {
 /**
  * This function inserts a new movie into the JSON file
  *
- * @param {object} newMovie The details about the movie
- * @returns {Promise} Returns the newly created movie
+ * @param {Object} newMovie The details about the movie
+ * @returns {Object} Returns the newly created movie
  */
 function insertMovie(newMovie) {
   return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ function insertMovie(newMovie) {
  *
  * @param {number} id The movie id
  * @param {object} newMovie The details about the updated movie
- * @returns {Promise} Returns the updated movie if updated successfully
+ * @returns {Object} Returns the updated movie if updated successfully
  */
 function updateMovie(id, newMovie) {
   return new Promise((resolve, reject) => {

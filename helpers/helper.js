@@ -26,7 +26,7 @@ const newDate = () => new Date().toString();
  *
  * @param  {Array} array The movies array
  * @param  {number} id The movie id
- * @returns {Promise} The movie object if found or an error otherwise
+ * @returns {Object} The movie object if found or an error otherwise
  */
 function searchByIdInArray(array, id) {
   return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ function searchByIdInArray(array, id) {
  *
  * @param  {Array} array The movies array
  * @param  {string} genre The genre that we want to filter
- * @returns {Promise} The movies that are filtered based on the genre
+ * @returns {Array} The movies that are filtered based on the genre
  */
 function filterByGenre(array, genre) {
   return new Promise((resolve, reject) => {
