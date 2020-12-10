@@ -70,7 +70,9 @@ function filterByGenre(array, genre) {
  * @param  {string} content The content that needs to be written
  */
 function writeJSONFile(filename, content) {
-  fs.writeFile(filename, JSON.stringify(content), "utf8", (err) => {
+  let fullContent = JSON.parse(fs.readFile(filename)).push(content);
+
+  fs.writeFile(filename, JSON.stringify(fullContent), "utf8", (err) => {
     if (err) {
       fs.writeFile(err);
     }

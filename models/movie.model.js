@@ -1,5 +1,4 @@
-const filename =
-  process.env.HOME + "/Desktop/Programming/Ontotext/MoviesAPI/data/movies.json";
+const filename = process.cwd() + "/data/movies.json";
 let movies = require(filename);
 const helper = require("../helpers/helper.js");
 
