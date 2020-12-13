@@ -1,27 +1,27 @@
-const movie = require("../models/movie.model");
+const movieService = require("../services/user.service");
 
 const getAllMovies = () => {
-  return movie.getMovies();
+  return movieService.getMovies();
 };
 
 const getMovieById = (id) => {
-  return movie.getMovie(id);
+  return movieService.getMovie(id);
 };
 
 const insertMovie = (parameters) => {
-  return movie.insertMovie(parameters);
+  return movieService.insertMovie(parameters);
 };
 
 const updateMovie = (id, parameters) => {
-  return movie.updateMovie(id, parameters);
+  return movieService.updateMovie(id, parameters);
 };
 
 const deleteMovie = (id) => {
-  return movie.deleteMovie(id);
+  return movieService.deleteMovie(id);
 };
 
 const filterMovies = (genre) => {
-  return movie.getMoviesByGenre(genre);
+  return movieService.getMoviesByGenre(genre);
 };
 
 module.exports = {

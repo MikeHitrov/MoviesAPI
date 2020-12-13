@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const movie = require("../models/movie.model");
 const middlewares = require("../helpers/middlewares");
 const controller = require("../controllers/movie.controller");
 

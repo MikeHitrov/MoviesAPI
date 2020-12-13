@@ -1,26 +1,3 @@
-const fs = require("fs");
-
-/**
- * This function generates a new id
- *
- * @param  {Array} array The movies array
- * @returns {number} The generated id
- */
-const getNewId = (array) => {
-  if (array.length > 0) {
-    return array[array.length - 1].id + 1;
-  } else {
-    return 1;
-  }
-};
-
-/**
- * This function generates a new date
- *
- * @returns {string} The generated date
- */
-const newDate = () => new Date().toString();
-
 /**
  * This function checks if a movie is in the object based on its id
  *
@@ -63,24 +40,7 @@ function filterByGenre(array, genre) {
   });
 }
 
-/**
- * This function writes on the JSON file
- *
- * @param  {string} filename The path to the file
- * @param  {string} content The content that needs to be written
- */
-function writeJSONFile(filename, content) {
-  fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
-    if (err) {
-      fs.writeFile(err);
-    }
-  });
-}
-
 module.exports = {
-  getNewId,
-  newDate,
   searchByIdInArray,
   filterByGenre,
-  writeJSONFile,
 };

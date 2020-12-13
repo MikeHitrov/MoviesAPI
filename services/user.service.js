@@ -1,4 +1,5 @@
 const filename = process.cwd() + "/data/movies.json";
+const fs = require("fs");
 let movies = require(filename);
 const helper = require("../helpers/helper.js");
 
@@ -37,14 +38,14 @@ function getMovie(id) {
  */
 function insertMovie(newMovie) {
   return new Promise((resolve, reject) => {
-    const id = { id: helper.getNewId(movies) };
+    const id = { id: getNewId(movies) };
     const date = {
-      createdAt: helper.newDate(),
-      updatedAt: helper.newDate(),
+      createdAt: newDate(),
+      updatedAt: newDate(),
     };
     newMovie = { ...id, ...newMovie, ...date };
     movies.push(newMovie);
-    helper.writeJSONFile(filename, movies);
+    writeJSONFile(movies);
     resolve(newMovie);
   });
 }
@@ -63,11 +64,11 @@ function updateMovie(id, newMovie) {
     id = { id: movie.id };
     const date = {
       createdAt: movie.createdAt,
-      updatedAt: helper.newDate(),
+      updatedAt: newDate(),
     };
 
     movies[index] = { ...id, ...date, ...newMovie };
-    helper.writeJSONFile(filename, movies);
+    writeJSONFile(movies);
     resolve(movies[id]);
   });
 }
@@ -83,7 +84,7 @@ function deleteMovie(id) {
     .searchByIdInArray(movies, Number(id))
     .then((index) => {
       movies = movies.filter((m) => m.id != id);
-      helper.writeJSONFile(filename, movies);
+      writeJSONFile(movies);
       resolve(undefined);
     })
     .catch((err) => {
@@ -105,6 +106,39 @@ function getMoviesByGenre(genre) {
       .catch((err) => reject(err));
   });
 }
+
+/**
+ * This function generates a new id
+ *
+ * @param  {Array} array The movies array
+ * @returns {number} The generated id
+ */
+const getNewId = (array) => {
+  if (array.length > 0) {
+    return array[array.length - 1].id + 1;
+  } else {
+    return 1;
+  }
+};
+
+/**
+ * This function writes on the JSON file
+ * @param  {string} content The content that needs to be written
+ */
+function writeJSONFile(content) {
+  fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
+    if (err) {
+      fs.writeFile(err);
+    }
+  });
+}
+
+/**
+ * This function generates a new date
+ *
+ * @returns {string} The generated date
+ */
+const newDate = () => new Date().toString();
 
 module.exports = {
   insertMovie,
