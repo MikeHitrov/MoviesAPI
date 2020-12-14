@@ -6,11 +6,15 @@
  * @param {Function} next - Next middleware function
  * @return {undefined}
  */
-function mustBeInteger(req, res, next) {
+function mustBeGUID(req, res, next) {
   const id = req.params.id;
 
-  if (!Number.isInteger(parseInt(id))) {
-    res.status(400).json({ message: "ID must be an integer" });
+  if (
+    !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
+      id
+    )
+  ) {
+    res.status(400).json({ message: "ID must be a GUID" });
   } else {
     next();
   }
@@ -35,6 +39,6 @@ function checkFieldsPost(req, res, next) {
 }
 
 module.exports = {
-  mustBeInteger,
+  mustBeGUID,
   checkFieldsPost,
 };

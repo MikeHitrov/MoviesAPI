@@ -6,14 +6,14 @@ const controller = require("../controllers/movie.controller");
 // Routes
 module.exports = router;
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
   controller
     .getAllMovies()
     .then((movies) => res.json(movies))
     .catch((err) => res.json(err));
 });
 
-router.get("/:id", middlewares.mustBeInteger, async (req, res) => {
+router.get("/:id", middlewares.mustBeGUID, (req, res) => {
   const id = req.params.id;
   controller
     .getMovieById(id)
@@ -21,7 +21,7 @@ router.get("/:id", middlewares.mustBeInteger, async (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.post("/", middlewares.checkFieldsPost, async (req, res) => {
+router.post("/", middlewares.checkFieldsPost, (req, res) => {
   controller
     .insertMovie(req.query)
     .then((movie) => res.json(movie))
@@ -30,9 +30,9 @@ router.post("/", middlewares.checkFieldsPost, async (req, res) => {
 
 router.put(
   "/:id",
-  middlewares.mustBeInteger,
+  middlewares.mustBeGUID,
   middlewares.checkFieldsPost,
-  async (req, res) => {
+  (req, res) => {
     const id = req.params.id;
     controller
       .updateMovie(id, req.query)
@@ -41,7 +41,7 @@ router.put(
   }
 );
 
-router.delete("/:id", middlewares.mustBeInteger, async (req, res) => {
+router.delete("/:id", middlewares.mustBeGUID, (req, res) => {
   const id = req.params.id;
 
   controller
@@ -50,7 +50,7 @@ router.delete("/:id", middlewares.mustBeInteger, async (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.get("/genre/:genre", async (req, res) => {
+router.get("/genre/:genre", (req, res) => {
   const genre = req.params.genre;
 
   controller

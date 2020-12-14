@@ -44,7 +44,7 @@ const updateMovie = (id, parameters) => {
  * This function deletes a movie by its id
  *
  * @param {number} id The movie id
- * @returns {undefined}
+ * @returns {number} The delted movie id
  */
 const deleteMovie = (id) => {
   return movieService.deleteMovie(id);
