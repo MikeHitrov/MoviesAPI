@@ -1,9 +1,9 @@
-const model = require("../models/movie.model.js");
+const service = require("../services/user.service");
 
 test("Gets all movies", () => {
-  expect(model.getMovies()).toBeDefined();
+  expect(service.getMovies()).toBeDefined();
 
-  model.getMovies().then((movies) => {
+  service.getMovies().then((movies) => {
     expect(movies.length).toBe(2);
   });
 });
@@ -23,11 +23,11 @@ test("Creates a movie", () => {
     ],
   };
 
-  model.insertMovie(newMovie).then((movie) => {
+  service.insertMovie(newMovie).then((movie) => {
     expect(movie.id).toBe(3);
   });
 
-  model.getMovies().then((movies) => {
+  service.getMovies().then((movies) => {
     expect(movies.length).toBe(3);
     expect(movies[2].title).toBe("Fast & Furious 3");
   });
@@ -48,33 +48,33 @@ test("Updates a movie", () => {
     ],
   };
 
-  model.updateMovie(3, updatedMovie).then((movie) => {
+  service.updateMovie(3, updatedMovie).then((movie) => {
     expect(movie.title).toBe("Fast & Furious 10");
     expect(movie.releaseDate).toBe(2021);
   });
 });
 
 test("Get movie by id", () => {
-  model.getMovie(3).then((movie) => {
+  service.getMovie(3).then((movie) => {
     expect(movie.title).toBe("Fast & Furious 10");
     expect(movie.releaseDate).toBe(2021);
   });
 });
 
 test("Get movies by genre", () => {
-  model.getMoviesByGenre("action").then((movies) => {
+  service.getMoviesByGenre("action").then((movies) => {
     expect(movies.length).toBe(2);
   });
 
-  model.getMoviesByGenre("science fiction").then((movies) => {
+  service.getMoviesByGenre("science fiction").then((movies) => {
     expect(movies.length).toBe(1);
   });
 });
 
 test("Deletes a movie", () => {
-  model.deleteMovie(3);
+  service.deleteMovie(3);
 
-  model.getMovies().then((movies) => {
+  service.getMovies().then((movies) => {
     expect(movies.length).toBe(2);
   });
 });
