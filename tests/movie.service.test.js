@@ -1,4 +1,5 @@
 const service = require("../services/user.service");
+let id = "";
 
 test("Gets all movies", () => {
   expect(service.getMovies()).toBeDefined();
@@ -24,12 +25,13 @@ test("Creates a movie", () => {
   };
 
   service.insertMovie(newMovie).then((movie) => {
-    expect(movie.id).toBe(3);
+    id = movie.id;
+    expect(service.getMovie(id).title).toBe("Fast & Furious 3");
   });
 
   service.getMovies().then((movies) => {
     expect(movies.length).toBe(3);
-    expect(movies[2].title).toBe("Fast & Furious 3");
+    expect(service.getMovie(id).title).toBe("Fast & Furious 3");
   });
 });
 
@@ -48,14 +50,14 @@ test("Updates a movie", () => {
     ],
   };
 
-  service.updateMovie(3, updatedMovie).then((movie) => {
+  service.updateMovie(id, updatedMovie).then((movie) => {
     expect(movie.title).toBe("Fast & Furious 10");
     expect(movie.releaseDate).toBe(2021);
   });
 });
 
 test("Get movie by id", () => {
-  service.getMovie(3).then((movie) => {
+  service.getMovie(id).then((movie) => {
     expect(movie.title).toBe("Fast & Furious 10");
     expect(movie.releaseDate).toBe(2021);
   });
@@ -72,7 +74,7 @@ test("Get movies by genre", () => {
 });
 
 test("Deletes a movie", () => {
-  service.deleteMovie(3);
+  service.deleteMovie(id);
 
   service.getMovies().then((movies) => {
     expect(movies.length).toBe(2);

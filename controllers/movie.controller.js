@@ -1,4 +1,5 @@
 const movieService = require("../services/user.service");
+const helper = require("../helpers/helper");
 
 /**
  * This function gets all movies
