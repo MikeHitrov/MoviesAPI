@@ -35,7 +35,7 @@ function getMovie(id) {
  */
 function insertMovie(newMovie) {
   return new Promise((resolve, reject) => {
-    const id = { id: getNewId(movies) };
+    const id = { id: getNewId() };
     const date = {
       createdAt: newDate(),
       updatedAt: newDate(),
@@ -77,16 +77,9 @@ function updateMovie(id, newMovie) {
  * @returns {undefined}
  */
 function deleteMovie(id) {
-  return helper
-    .searchByIdInArray(movies, Number(id))
-    .then((index) => {
-      movies = movies.filter((m) => m.id != id);
-      writeJSONFile(movies);
-      resolve(id);
-    })
-    .catch((err) => {
-      reject(err);
-    });
+  movies = movies.filter((m) => m.id != id);
+  writeJSONFile(movies);
+  return id;
 }
 
 /**
@@ -96,12 +89,7 @@ function deleteMovie(id) {
  * @returns {Promise} Returns all the filtered movies
  */
 function getMoviesByGenre(genre) {
-  return new Promise((resolve, reject) => {
-    helper
-      .filterByGenre(movies, genre)
-      .then((movies) => resolve(movies))
-      .catch((err) => reject(err));
-  });
+  return helper.filterByGenre(movies, genre);
 }
 
 /**

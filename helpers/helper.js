@@ -10,7 +10,7 @@ function searchByIdInArray(array, id) {
     const row = array.find((r) => r.id == id);
     if (!row) {
       reject({
-        message: "ID is not good",
+        message: "ID not found",
         status: 404,
       });
     }
@@ -31,7 +31,7 @@ function filterByGenre(array, genre) {
 
     if (!rows) {
       reject({
-        message: "There are not any films with this genre.",
+        message: "There are not any movies with this genre.",
         status: 404,
       });
     }
