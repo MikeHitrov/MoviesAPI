@@ -80,3 +80,29 @@ test("Deletes a movie", () => {
     expect(movies.length).toBe(2);
   });
 });
+
+test("Delete a non-existing film", () => {
+  service.deleteMovie(id);
+
+  service.getMovies().then((movies) => {
+    expect(movies.length).toBe(2);
+  });
+});
+
+test("Delete a non-existing film", () => {
+  service.deleteMovie("6fb43fda-5a16-482c-afb3-4cd698c66ea3");
+  service.deleteMovie("cb6553ea-c61c-4097-a881-e826b421675b");
+
+  service.getMovies().then((movies) => {
+    expect(movies).toBe([]);
+  });
+});
+
+test("Search for a non-existing movie", () => {
+  service.getMovie().then((result) => {
+    expect(result).toBe({
+      message: "ID not found",
+      status: 404,
+    });
+  });
+});

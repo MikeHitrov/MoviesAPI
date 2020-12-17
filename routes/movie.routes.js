@@ -44,7 +44,10 @@ router.put(
 router.delete("/:id", middlewares.mustBeGUID, (req, res) => {
   const id = req.params.id;
 
-  res.json(controller.deleteMovie(id));
+  controller
+    .deleteMovie(id)
+    .then((id) => res.json(id))
+    .catch((err) => res.json(err));
 });
 
 router.get("/genre/:genre", (req, res) => {

@@ -114,7 +114,7 @@ const getNewId = () => {
 function writeJSONFile(content) {
   fs.writeFileSync(filename, JSON.stringify(content), "utf8", (err) => {
     if (err) {
-      fs.writeFile(err);
+      fs.writeFile(JSON.stringify(err));
     }
   });
 }
@@ -133,4 +133,5 @@ module.exports = {
   updateMovie,
   deleteMovie,
   getMoviesByGenre,
+  writeJSONFile,
 };
