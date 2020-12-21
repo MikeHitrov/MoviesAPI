@@ -2,11 +2,9 @@ MoviesAPI
 A simple API, which provides CRUD operations over movies model.
 
 # Before running the app:
-
-`npm install`<br/>
-`yarn install` - jest is unavailable for npm (throws an error)
+`yarn install`
 
 # Commands:
 
-`npm run dev` - runs the project<br/>
-`npm run test` - runs the jest tests
+`yarn run dev` - runs the project<br/>
+`yarn run test` - runs the jest tests
